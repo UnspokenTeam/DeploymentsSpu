@@ -1,0 +1,22 @@
+﻿services:
+    postgres-db-prod:
+        profiles: [prod]
+        container_name: postgresDbProd
+        image: postgres:17
+        restart: unless-stopped
+        pull_policy: missing
+        env_file: "../env/postgres/.env"
+        healthcheck:
+            test: /usr/bin/pg_isready
+            interval: 5s
+            timeout: 10s
+            retries: 120
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres-data1:/var/lib/postgresql/data
+        networks:
+            - caddy_shared
+
+volumes:
+    postgres-data1:

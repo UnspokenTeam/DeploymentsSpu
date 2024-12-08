@@ -1,0 +1,24 @@
+﻿services:
+    minio-dev:
+        profiles: [dev]
+        image: minio/minio:latest
+        container_name: minioDev
+        restart: unless-stopped
+        pull_policy: missing
+        env_file: "../env/minio/.env"
+        healthcheck:
+            test: [ "CMD", "mc", "ready", "local" ]
+            interval: 5s
+            timeout: 10s
+            retries: 120
+        ports:
+            - "9002:9000"
+            - "9003:9001"
+        volumes:
+            - minio-data-dev:/data
+        command: server /data --console-address ":9001"
+        networks:
+            - caddy_shared
+
+volumes:
+    minio-data-dev:

@@ -1,0 +1,16 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "spu",
+      "Group": "Servers",
+      "Host": "postgresDbDev",
+      "Port": 5432,
+      "MaintenanceDB": "spu_db",
+      "Username": "spu",
+      "UseSSHTunnel": 0,
+      "TunnelPort": "22",
+      "TunnelAuthentication": 0,
+      "KerberosAuthentication": false
+    }
+  }
+}

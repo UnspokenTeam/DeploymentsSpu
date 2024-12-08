@@ -1,0 +1,42 @@
+﻿spu.ru {
+        reverse_proxy SpuFrontend:3000 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+        }
+}
+
+sso.spu.ru {
+        reverse_proxy SpuAuth:5296 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+        }
+}
+
+api.spu.ru {
+        handle_path /main/* {
+                reverse_proxy SpuApiMain:5296 {
+                    header_up Host {host}
+                    header_up X-Real-IP {remote_host}
+                }
+        }
+        handle_path /notifications/* {
+                reverse_proxy SpuApiNotifications:5296 {
+                    header_up Host {host}
+                    header_up X-Real-IP {remote_host}
+                }
+        }
+}
+
+grafana.spu.ru {
+        reverse_proxy grafanaDev:3000 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+        }
+}
+
+db.spu.ru {
+    reverse_proxy pgadminDev:6432 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+    }
+}
