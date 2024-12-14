@@ -1,0 +1,19 @@
+services:
+  zookeeper-prod:
+    profiles: [prod]
+    container_name: zookeeperProd
+    image: confluentinc/cp-zookeeper:7.7.0
+    restart: unless-stopped
+    pull_policy: missing
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      KAFKA_OPTS: -Djava.security.auth.login.config=/etc/kafka/zookeeper_server_jaas.conf
+        -Dzookeeper.authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
+        -Dzookeeper.allowSaslFailedClients=false
+        -Dzookeeper.requireClientAuthScheme=sasl
+    ports:
+      - "2181:2181"
+    volumes:
+      - ../env/kafka/zookeeper.conf:/etc/kafka/zookeeper_server_jaas.conf
+    networks:
+      - caddy_shared

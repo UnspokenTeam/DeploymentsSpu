@@ -1,0 +1,20 @@
+services:
+  pgadmin-prod:
+    profiles: [prod]
+    container_name: pgadminProd
+    image: dpage/pgadmin4:8.11
+    restart: unless-stopped
+    pull_policy: missing
+    env_file: "../env/pgadmin/.env.production"
+    ports:
+      - "7432:6432"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./servers-prod.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres-db-prod
+    networks:
+      - caddy_shared
+
+volumes:
+  pgadmin-data:

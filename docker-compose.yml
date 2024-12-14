@@ -1,0 +1,12 @@
+﻿include:
+  - networks/docker-compose.networks.yml
+  - postgres/docker-compose.pgadmin-dev.yml
+  - postgres/docker-compose.pgadmin-prod.yml
+  - postgres/docker-compose.postgres-dev.yml
+  - postgres/docker-compose.postgres-prod.yml
+  - minio/docker-compose.s3-dev.yml
+  - minio/docker-compose.s3-prod.yml
+  - kafka/docker-compose.kafka-dev.yml
+  - kafka/docker-compose.kafka-prod.yml
+  - kafka/docker-compose.zookeeper-dev.yml
+  - kafka/docker-compose.zookeeper-prod.yml

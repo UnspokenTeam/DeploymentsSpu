@@ -1,0 +1,3 @@
+﻿networks:
+  caddy_shared:
+    external: true
